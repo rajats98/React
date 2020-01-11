@@ -12,11 +12,9 @@ class App extends Component{
         <h3>Simple Todo App</h3>
         <form
           onSubmit = {(e)=>{
-          e.preventDefault();
-          const input = this.state.input;
-          const list = this.state.list.slice();
-          list.push(input);
-          this.setState({list,input:""});
+            e.preventDefault();
+            const list = [...this.state.list,this.state.input];
+            this.setState({list,input:""});
         }}
         >
           <input 
