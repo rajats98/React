@@ -5,18 +5,8 @@ import PropTypes from 'prop-types';
 
 class RecipeList extends Component {
 	
-
-	static propTypes ={
-		recipes:PropTypes.arrayOf(PropTypes.object)
-	};
-	static defaultProps = {
-			recipes:[{title:"pasta", ingredients:["flour","water"], instructions : "Mix ingredients", img:"pasta.jpeg" },
-				 {title:"pasta", ingredients:["flour","water"], instructions : "Mix ingredients", img:"pasta.jpeg" },
-				 {title:"pasta", ingredients:["flour","water"], instructions : "Mix ingredients", img:"pasta.jpeg" }	
-				]
-	};
 	render(){
-		const recipes = this.props.recipes.map((r,i)=> (<Recipe key={i} {...r} />));
+		const recipes = this.props.recipes.map((r,i)=> (<Recipe key={r.id} {...r} />));
 
 		return (
 			<div className="recipe-list">
