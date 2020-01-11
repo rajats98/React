@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
 
+const NUM_BOXES=32;
 class App extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {
-      arr:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
-    }
+    const arr = Array(NUM_BOXES).fill().map(()=>(Math.floor(Math.random()*this.props.allColors.length)));
+    this.state = {arr};
+
     setInterval(()=>{
-    const allColors = this.props.allColors;
-    const r_box_index = Math.floor(Math.random()*31);
-    const r_color_index = Math.floor(Math.random()*(allColors.length-1));
-    // const temp = [...this.state.arr.slice(0,2)];
-    // console.log(temp);
-    // const arr = [...this.state.arr.slice(0,r_box_index),r_color_index,...this.state.arr.slice(r_box_index+1)];
-    // console.log(arr.length,r_box_index,r_color_index);
-    // this.setState({arr});
-    this.setState((prevState,props)=>{
-    const arr = [...prevState.arr.slice(0,r_box_index),r_color_index,...prevState.arr.slice(r_box_index+1)];
-      return {arr};
-    })
-  },3000)
+      const r_box_index = Math.floor(Math.random()*32);
+      const r_color_index = Math.floor(Math.random()*this.props.allColors.length);
+      const arr = this.state.arr.slice();
+      arr[r_box_index]=r_color_index;
+      this.setState({arr});
+    },300);
   }
   
 
