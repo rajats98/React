@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './RecipeList.css';
 import Recipe from './Recipe';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 class RecipeList extends Component {
 	
