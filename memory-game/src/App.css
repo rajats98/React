@@ -1,4 +1,20 @@
-
+.navbar{
+  background-color:darkblue ;
+  color:white;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+  .navbar h2{
+    margin: 0px 10px;
+  }
+  .navbar p{
+    margin: 0 10px;
+    align-self: center;
+    font-weight: bold;
+  }
+  
 .box-container{
   display: flex;
   flex-direction: row;

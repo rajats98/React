@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import Boxes from './Boxes';
+import MemoryGame from './MemoryGame';
 import shuffle from 'shuffle-array';
 
 class App extends Component {
@@ -10,12 +10,12 @@ class App extends Component {
     let colors = Array(8).fill().map(()=>(allColors[Math.floor(Math.random()*allColors.length)]));
     colors = shuffle([...colors,...colors]);
     return (
-      <Boxes colors={colors}/>
+      <MemoryGame colors={colors}/>
     );
   }
 }
 
-
+export default App;
 App.defaultProps = {
   allColors: ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond",
               "Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate",
@@ -39,4 +39,3 @@ App.defaultProps = {
               "Yellow","YellowGreen"]
 };
 
-export default App;
