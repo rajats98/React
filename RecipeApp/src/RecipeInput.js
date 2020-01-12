@@ -3,7 +3,8 @@ import './RecipeInput.css'
 
 class RecipeInput extends Component {
 	static defaultProps = {
-		onClose(){ } 
+		onClose(){},
+		onSave(){}
 	}
 	constructor(props){
 		super(props);
@@ -13,13 +14,40 @@ class RecipeInput extends Component {
 			ingredients: [''],
 			img : ''
 		};
+		this.handleNewIngredient = this.handleNewIngredient.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleChangeIng =this.handleChangeIng.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleChange(e){
 		this.setState({[e.target.name]:e.target.value});
 	}
 
+	handleNewIngredient(e){
+		const {ingredients} = this.state;
+		this.setState({ingredients:[...ingredients,'']});
+	}
+
+	handleChangeIng(e){
+		const index = Number(e.target.name.split('-')[1]);
+		const ingredients = this.state.ingredients.map((ing,i)=>(
+			i===index ? e.target.value :ing
+		));
+		this.setState({ingredients});
+	}
+
+	handleSubmit(e){
+		e.preventDefault();
+		this.props.onSave({...this.state});
+		this.setState({
+			title: '',
+			instructions: "",
+			ingredients: [''],
+			img : ''
+		});
+
+	}
 	render() {
 		const {title,instructions,ingredients,img} = this.state;
 		const {onClose} = this.props;
@@ -28,7 +56,7 @@ class RecipeInput extends Component {
 				className = "recipe-form-line"
 				key = {`ingredients-${i}`}
 			>
-				<label>
+				<label>{i+1}.
 					<input
 						type='text'
 						name={`ingredients-${i}`}
@@ -36,7 +64,7 @@ class RecipeInput extends Component {
 						size={45}
 						autoComplete="off"
 						placeholder = " Ingredient"
-						onChange = {()=>{}}
+						onChange = {this.handleChangeIng}
 
 					/>
 				</label>
@@ -46,7 +74,7 @@ class RecipeInput extends Component {
 
 		return (
 			<div className="recipe-form-container">
-				<form className="recipe-form" onSubmit ={()=>{}}>
+				<form className="recipe-form" onSubmit ={this.handleSubmit}>
 					<button
 						type="button"
 						className="close-button"
@@ -114,6 +142,7 @@ class RecipeInput extends Component {
 					>
 						SAVE
 					</button>
+
 				</form>				
 			</div>
 		);
