@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
 import './App.css';
 import Boxes from './Boxes';
-
+import shuffle from 'shuffle-array';
 
 class App extends Component {
-  shuffle(arr){
-    return arr.sort(()=>(Math.random()-0.5));
-  }
 
   render() {
     const {allColors} =this.props;
     let colors = Array(8).fill().map(()=>(allColors[Math.floor(Math.random()*allColors.length)]));
-    colors = this.shuffle([...colors,...colors]);
+    colors = shuffle([...colors,...colors]);
     return (
       <Boxes colors={colors}/>
     );
