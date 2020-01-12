@@ -1,0 +1,25 @@
+
+.box-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.box{
+  height:150px;
+  width:150px;
+  margin: 5px;
+  border-radius: 10px;
+
+}
+
+/*0-grey*/
+.state-0{
+  background: grey !important;
+}
+/*1-temp color*/
+.state-1{
+  border: 2px black solid;
+
+}
+
+/*2-color*/
