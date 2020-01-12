@@ -6,8 +6,7 @@ import Recipe from './Recipe';
 class RecipeList extends Component {
 	
 	render(){
-		const recipes = this.props.recipes.map((r,i)=> (<Recipe key={r.id} {...r} />));
-
+		const recipes = this.props.recipes.map((r,i)=> (<Recipe key={r.id} {...r} onDelete={this.props.onDelete} />));
 		return (
 			<div className="recipe-list">
 				{recipes}
