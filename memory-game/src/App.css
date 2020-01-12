@@ -9,7 +9,7 @@
   width:150px;
   margin: 5px;
   border-radius: 10px;
-
+  transition: 2s;
 }
 
 /*0-grey*/
@@ -18,8 +18,9 @@
 }
 /*1-temp color*/
 .state-1{
-  border: 2px black solid;
-
 }
 
 /*2-color*/
+.state-2{
+  border: 0.5px black solid;
+}
