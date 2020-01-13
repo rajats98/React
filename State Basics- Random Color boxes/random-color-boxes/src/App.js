@@ -9,7 +9,7 @@ class App extends Component {
     const arr = Array(NUM_BOXES).fill().map(()=>(Math.floor(Math.random()*this.props.allColors.length)));
     this.state = {arr};
 
-    setInterval(()=>{
+    this.intervalId = setInterval(()=>{
       const r_box_index = Math.floor(Math.random()*32);
       const r_color_index = Math.floor(Math.random()*this.props.allColors.length);
       const arr = this.state.arr.slice();
@@ -18,6 +18,9 @@ class App extends Component {
     },300);
   }
   
+  componentWillUnmount(){
+    clearInterval(this.intervalId);
+  }
 
   render() {
 
