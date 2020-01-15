@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.form-container{
+  width: 70%;
+  margin: 0 auto;
+}
+ 
+.form-container form{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.correct-answer{
+  color:green;
+}
+.wrong-answer{
+  color:red;
+}
+.wrong-answer span{
+  color:black;
+  margin-left:3px;
+}
