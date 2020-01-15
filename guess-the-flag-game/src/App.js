@@ -1,11 +1,13 @@
 import React,{Component} from 'react';
+import Question from './Question';
+import Result from './Result';
 import './App.css';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      allCountries : [],
+      allCountries : undefined,
       options: [],
       answer: "",
       optionSelected:"",
@@ -15,8 +17,6 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleNext   = this.handleNext.bind(this);
-
-
   }
 
   makeQuestion(){
@@ -32,7 +32,6 @@ class App extends Component {
     let currentState=0;
     optionSelected===answer ? currentState=1 : currentState=2;
     this.setState({currentState})
-
   }
   handleChange(index){
     const optionSelected = this.state.options[index];
@@ -45,7 +44,6 @@ class App extends Component {
       optionSelected:"",
       currentState:0   //0->question,1->correct Ans 2->wrong Ans
     },this.makeQuestion);
-    
   }
   async componentDidMount(){
     let allCountries = await fetch("http://restcountries.eu/rest/v2/all");
@@ -55,20 +53,15 @@ class App extends Component {
     this.makeQuestion();
   }
 
-
   render() {
-    let {options,currentState,answer} = this.state;
-    options = options.map((o,i)=>(
-      <p key={i}> 
-        <input type="radio" id={`option-${i}`} name="option" onChange={()=>{this.handleChange(i)}} />
-        {o.name}
-      </p>
-    ));
-
-    let view = currentState===0
-    ? <Question options={options} handleSubmit={this.handleSubmit}/> 
-    : <Result answer={answer} currentState={currentState} handleNext={this.handleNext}/>
-
+    let {options,currentState,answer,optionSelected,allCountries} = this.state;
+    let view = <div>Loading .... </div>;
+    if(allCountries!==undefined){
+      view = currentState===0
+      ? <Question options={options} handleSubmit={this.handleSubmit} handleChange={this.handleChange} optionSelected={optionSelected}/> 
+      : <Result answer={answer} currentState={currentState} handleNext={this.handleNext}/>
+  
+    }
     return (
       <div className="App">
         <h2>Guess The Country</h2>
@@ -77,30 +70,6 @@ class App extends Component {
       </div>
     );
   }
-}
-
-const Question = (props)=>{
-  const {options,handleSubmit} = props;
-  return(
-    <div className="form-container">
-      <form onSubmit = {handleSubmit}>
-          {options}
-        <button> Guess </button>
-      </form>
-    </div>
-  )
-}
-const Result = (props)=>{
-  const {answer,currentState,handleNext} = props;
-  let toRender =  <div>
-                    {currentState===1
-                    ?<p className="correct-answer">Yay!! Correct Answer! </p>
-                    :<p className="wrong-answer"> :( Incorrect Answer! <span> Correct:<b>{answer.name}</b></span></p>}
-                     <button onClick = {handleNext}> Next  </button>
-                  </div>
-  return(
-    toRender
-  );
 }
 
 export default App;
