@@ -22,17 +22,19 @@ function rootReducer(state=initialState,action) {
 
 const store = Redux.createStore(rootReducer);
 
+const increment = ()=>({type:'INCREMENT'});
+const decrement = ()=>({type:'DECREMENT'});
 $(document).ready(function(){
 	let currentState = store.getState();
 	$('#counter').text(currentState.count);	
 	
 	$("#increment").on("click",function(){
-		store.dispatch({type:'INCREMENT'});
+		store.dispatch(increment());
 		let currentState = store.getState();
 		$('#counter').text(currentState.count);
 	})
 	$("#decrement").on("click",function(){
-		store.dispatch({type:'DECREMENT'});
+		store.dispatch(decrement());
 		let currentState = store.getState();
 		$('#counter').text(currentState.count);
 	})
