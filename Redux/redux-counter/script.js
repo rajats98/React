@@ -24,18 +24,19 @@ const store = Redux.createStore(rootReducer);
 
 const increment = ()=>({type:'INCREMENT'});
 const decrement = ()=>({type:'DECREMENT'});
-$(document).ready(function(){
+const updateCounter = ()=>{
 	let currentState = store.getState();
 	$('#counter').text(currentState.count);	
-	
+}
+$(document).ready(function(){
+	updateCounter();
 	$("#increment").on("click",function(){
 		store.dispatch(increment());
-		let currentState = store.getState();
-		$('#counter').text(currentState.count);
+		updateCounter();
+		
 	})
 	$("#decrement").on("click",function(){
 		store.dispatch(decrement());
-		let currentState = store.getState();
-		$('#counter').text(currentState.count);
+		updateCounter();
 	})
 })
